@@ -27,5 +27,8 @@ COPY . .
 # Open up the port (3000) - Default port of Node.JS 
 EXPOSE 3000
 
+# Start NPM
+CMD ["npm", "start"]
+
 # RUN THE APP WTIH CMD
 CMD ["node","app.js"]
