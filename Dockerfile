@@ -29,4 +29,3 @@ EXPOSE 3000
 
 # RUN THE APP WTIH CMD
 CMD ["node","app.js"]
-CMD ["npm", "test"]
