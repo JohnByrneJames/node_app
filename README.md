@@ -44,5 +44,10 @@ By the end of this guide you will be able to integrate, deliver and deploy code 
 	* **Security Group** : Choose the Security group you created, in previous step.
 	* **Add Key** : Choose a key to SSH into instance.
 
+
+**This is a diagram I made to help clarify the End-to-End Lifecycle**
+
+![ImageOfEndToEndDiagram](img/ImageE2EDiagram.png)
+
 ## Creating Jenkins Instance
 
