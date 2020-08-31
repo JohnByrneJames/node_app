@@ -15,14 +15,14 @@ COPY . .
 
 # Second stage of our build for production ~
 # multi stage Docker build
-#FROM node:alpine
+FROM node:alpine
 
 # Copy only essential things to this layer
 # This line compresses the size whilst still providing full functionality
-#COPY --from=app /usr/src/app /usr/src/app
+COPY --from=app /usr/src/app /usr/src/app
 
 # Define work directory in second stage
-#WORKDIR /usr/src/app
+WORKDIR /usr/src/app
 
 # Open up the port (3000) - Default port of Node.JS 
 EXPOSE 3000
