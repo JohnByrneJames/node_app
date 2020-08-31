@@ -2,12 +2,15 @@
 
 By the end of this guide you will be able to integrate, deliver and deploy code to a docker image on the docker hub. **This guide requires access to AWS**.
 
-### Pre-Requisites
+## Pre-Requisites
+
 1. **3** EC2 (_Elastic Compute Cloud_) instances on AWS.
 	* **1**: Jenkins-Master instance.
 	* **2**: Jenkins-Slave instance.
 	* **3**: Docker Production instance.
 2. Set up a Security Group that can be used for all the EC2 Instances.
+
+**Inbound Rules**
 	
 | **Type**   | **Protocol** | **Port range** | **Source**      | **Description**                  |
 |------------|--------------|----------------|-----------------|----------------------------------|
@@ -23,7 +26,13 @@ By the end of this guide you will be able to integrate, deliver and deploy code 
 | HTTPS      | TCP          | 443            | ::/0            | HTTPS Access                     |
 | Custom TCP | TCP          | 9007           | 0.0.0.0/0       | Allow Slave access  on this Port |
 | Custom TCP | TCP          | 9007           | ::/0            | Allow Slave access on this Port  |
-	
+
+**OutBound Rules**
+
+| **Type**    | **Protocol** | **Port range** | **Source** | **Description**       |
+|-------------|--------------|----------------|------------|-----------------------|
+| All traffic | All          | All            | 0.0.0.0/0  | Allow All Traffic Out |
+
 3. Each Instance must have the same settings:
 	* **AMI** : Ubuntu Server 16.04 LTS (HVM) _64-bit (x86)_
 	* **Type** : t2.micro
@@ -34,3 +43,6 @@ By the end of this guide you will be able to integrate, deliver and deploy code 
 	* **Tags** : **Name** : <name_of_instance>
 	* **Security Group** : Choose the Security group you created, in previous step.
 	* **Add Key** : Choose a key to SSH into instance.
+
+## Creating Jenkins Instance
+
