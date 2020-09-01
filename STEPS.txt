@@ -1,0 +1,47 @@
+STEPS TO CICD WITH JENKINS TO DOCKER HUB AND CONTAINER
+
+1. CREATE JENKINS MASTER AND SLAVE ON AWS
+
+RIGHT CLICK LINK TO GET AGENT JAR DOWNLOAD
+
+RUN sudo wget http://34.255.192.95:8080/jnlpJars/agent.jar
+
+RUN sudo java -jar agent.jar -jnlpUrl http://34.255.192.95:8080/computer/slave1/slave-agent.jnlp -secret a2def58a099e15de07b5c808f56d7728bb6ed87dc5d6d84849818e1ac67790b8
+
+EC2 Instance may not be updated as the IPv4 changes day-to-day
+
+2. CONFIGURE JOB FOR CONTINUOUS INTEGRATION
+
+Git branch specifier = */dev* (any branch starting with dev)
+
+Add ssh git cloning route, as this provides rights for Jenkins to merge - skips need for credentials plugins.
+
+3. SETUP WEBHOOK ~ HTTP://IP:8080/GITHUB-WEBHOOK/
+
+4. SET UP DOCKER ON SLAVE NODE SO I CAN DO THE DELIVERY WITH OUR PIPELINE JOB
+
+SETUP DOCKER : https://docs.docker.com/engine/install/ubuntu/
+
+TEST DOCKER IS INSTALLED
+
+5. SETUP PIPELINE JOB WITH JENKINS / INSTALL DOCKER PIPELINE
+
+Add Dockerhub credentials
+
+Add in Groovy syntax to clone Repo, Build Image, Deploy Image and Clean up 
+
+6. Create email notification of build using Google scripts and Dockerhub Webhook
+
+Make sure you only have 1 google user signed in!
+
+https://script.google.com/macros/s/AKfycbwm1h6LCaRn1O-nfqHAd_x0bbI3F9vyDj5N0Svi47lmKcvt8j4/exec
+
+7. Setup docker on 3rd EC2 instance that will host a production container running the final version of the image pulled from the dockerhub
+
+Get SSH Agent with correct devops pem key
+
+ssh -o "StrictHostKeyChecking=no" ubuntu@<Ipv4 of EMC> <<EOF 
+code here ...
+EOF 
+
+remove old images/ container for new deployment, in .sh file so it can run special character commands '$'
